@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator - Jagu</title>
+    <style>
+        body {
+            background: #0f2027;
+            background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            background: #1c1c1c;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px #00f7ff88;
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #00e7ff;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00c3d1;
+        }
+
+        #qr-code {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Talniya QR Code Generator</h1>
+        <input type="text" id="qrText" placeholder="Enter text or URL" />
+        <br />
+        <button onclick="generateQR()">Generate QR</button>
+        <div id="qr-code"></div>
+    </div>
+
+    <!-- External QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script>
+        function generateQR() {
+            const qrContainer = document.getElementById("qr-code");
+            const text = document.getElementById("qrText").value;
+
+            qrContainer.innerHTML = ""; // clear previous QR
+
+            if (!text.trim()) {
+                alert("Please enter some text or URL");
+                return;
+            }
+
+            new QRCode(qrContainer, {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",   // Black dots
+                colorLight: "#ffffff",  // White background
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+
+        }
+    </script>
+</body>
+
+</html>
